@@ -1,6 +1,7 @@
 
 const db = require('../db')
 const shortid = require('shortid')
+
 /*
     *   GET
     *   POST
@@ -37,12 +38,12 @@ module.exports.find = (req, res) => {
 }
 
 module.exports.create = (req, res) => {
-    console.log(req.cookies)
     res.render('users/create')
 }
 
 module.exports.postCreate = (req, res) => {
     req.body.id = shortid.generate()
+    req.body.avatar = req.file.path.split('\\').slice(1).join('/')
     console.log(res.locals)
     db.get('users').push(req.body).write();
     res.redirect('/users')  //chuyen huong nguoi dung

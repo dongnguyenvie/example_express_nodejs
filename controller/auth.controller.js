@@ -7,22 +7,26 @@ module.exports.login = (req, res) => {
 module.exports.postLogin = (req, res) => {
     var email = req.body.email;
     var pass = req.body.pass;
-    db.get('users').find({ email: email }).value();
+    var user = db.get('users').find({ email: email }).value();
     if (!user) {
         res.render('auth/login', {
-            error: [
-                'User not exits'
-            ]
+            errors: [
+                'email not exits'
+            ],
+            values: req.body
         })
         return;
     }
     if (user.password !== pass) {
         res.render('auth/login', {
-            error: [
-                'User not exits'
-            ]
+            errors: [
+                'pass not exits'
+            ],
+            values: req.body
         })
         return;
     }
+    
+    res.cookie('userId', user.id)
     res.redirect('/users')
 }

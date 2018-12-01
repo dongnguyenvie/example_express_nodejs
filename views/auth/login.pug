@@ -5,9 +5,9 @@ block content
         if errors
             each error in errors
                 .alert.alert-danger= error
-        form(action="/auth/login", method="POST")
-            Label(for="name") name
-            input(type="text", name="name" class="form-control", value = values ? values.name : "")
-            Label(name="phone") Phone
+        form(action="", method="POST")
+            Label(for="name") email
+            input(type="text", name="email" class="form-control", value = values ? values.name : "")
+            Label(name="phone") pass
             input(type="text", name="pass" class="form-control", value = values ? values.phone : "")
             Button(class="btn btn-primary") Login

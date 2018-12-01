@@ -2,7 +2,7 @@ const express = require('express');
 const port = 3000
 const bodyParse = require('body-parser')
 var cookieParser = require('cookie-parser')
-
+var authMiddleware = require('./middleware/auth.middleware')
 const app = express()
 
 const useRoute = require('./routes/user.route')
@@ -22,7 +22,7 @@ app.use(cookieParser())
 app.use('/styles', express.static('public'))
 
 //route
-app.use('/users', useRoute)
+app.use('/users',authMiddleware.requireAuth, useRoute)
 app.use('/auth', authRoute)
 
 

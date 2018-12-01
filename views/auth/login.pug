@@ -1,13 +1,13 @@
 extends ../layouts/common.pug
 block content
     div(class="container")
-        h1 Create User
+        h1 Login
         if errors
             each error in errors
                 .alert.alert-danger= error
-        form(action="/users/create", method="POST")
+        form(action="/auth/login", method="POST")
             Label(for="name") name
             input(type="text", name="name" class="form-control", value = values ? values.name : "")
             Label(name="phone") Phone
-            input(type="text", name="phone" class="form-control", value = values ? values.phone : "")
-            Button(class="btn btn-primary") ADD
+            input(type="text", name="pass" class="form-control", value = values ? values.phone : "")
+            Button(class="btn btn-primary") Login

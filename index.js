@@ -1,5 +1,7 @@
+require('dotenv').config();
+console.log(process.env.SESSION_SECRET)
 const express = require('express');
-const port = 3000
+const port = 3000 || process.env.port
 const bodyParse = require('body-parser')
 var cookieParser = require('cookie-parser')
 var authMiddleware = require('./middleware/auth.middleware')
@@ -16,7 +18,7 @@ app.set('views', './views')
 app.use(bodyParse.json())
 app.use(bodyParse.urlencoded({ extended: true }))
 //parser cookie
-app.use(cookieParser())
+app.use(cookieParser(process.env.SESSION_SECRET))
 
 //express static
 app.use('/styles', express.static('public'))

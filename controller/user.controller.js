@@ -1,4 +1,4 @@
-
+const md5 = require('md5')
 const db = require('../db')
 const shortid = require('shortid')
 
@@ -10,7 +10,7 @@ const shortid = require('shortid')
 */
 module.exports.index = (req, res) => {
     res.render("users/index", {
-        user: db.get('users').value()
+        users: db.get('users').value()
     })
 }
 
@@ -21,9 +21,9 @@ module.exports.search = (req, res) => {
     var matchedUsers = lstUser.filter(user => {
         return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
     })
-    console.log(matchedUsers)
+  //  console.log(matchedUsers)
     res.render('../views/index', {
-        user: matchedUsers,
+        users: matchedUsers,
         key: q
     })
 }
@@ -31,9 +31,8 @@ module.exports.search = (req, res) => {
 module.exports.find = (req, res) => {
     let id = req.params.id;
     var user = db.get('users').find({ id: id }).value();
-    console.log(user);
     res.render('users/view', {
-        user: user
+        users : user
     })
 }
 
@@ -43,8 +42,8 @@ module.exports.create = (req, res) => {
 
 module.exports.postCreate = (req, res) => {
     req.body.id = shortid.generate()
+    req.body.password = md5(req.body.password);
     req.body.avatar = req.file.path.split('\\').slice(1).join('/')
-    console.log(res.locals)
     db.get('users').push(req.body).write();
     res.redirect('/users')  //chuyen huong nguoi dung
 }

@@ -1,0 +1,17 @@
+extends ../layouts/common.pug
+block content
+    .container
+        .row
+            each pro in products
+                .col-md-3
+                    .card(style='width: 18rem;')
+                        img.card-img-top(src=pro.image, alt='Card image cap')
+                        .card-body
+                            h5.card-title= pro.name
+                            p.card-text= pro.description
+                            a.btn.btn-primary(href='/cart/add/'+ pro.id) Cart 
+        nav.Page.navigation.example
+            ul.pagination
+                each val in [1,2,3,4,5]
+                    li.page-item
+                        a.page-link= val

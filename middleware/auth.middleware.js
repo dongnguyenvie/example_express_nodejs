@@ -11,7 +11,6 @@ module.exports.requireAuth = (req, res, next) => {
         return
     }
 
-    console.log(req.signedCookies)
     res.locals.user = user;
     next()
 }

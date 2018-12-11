@@ -13,7 +13,9 @@ module.exports.index = (req,res)=>{
 
     res.render('products/index',{
         //products: db.get('products').value().slice(start,end)
-        products : db.get('products').drop(drop).take(perPage).value()
+        products : db.get('products').drop(drop).take(perPage).value(),
+        perPage : perPage,
+        proSize : db.get('products').size()
     })
 }
 

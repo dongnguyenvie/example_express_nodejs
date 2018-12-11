@@ -12,6 +12,7 @@ block content
                             a.btn.btn-primary(href='/cart/add/'+ pro.id) Cart 
         nav.Page.navigation.example
             ul.pagination
-                each val in [1,2,3,4,5]
+                -let n =0
+                while n < proSize/perPage
                     li.page-item
-                        a.page-link= val
+                        a(href=`product?page=${n}`).page-link= n++

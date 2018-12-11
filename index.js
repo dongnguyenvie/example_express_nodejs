@@ -1,5 +1,5 @@
 require('dotenv').config();
-console.log(process.env.SESSION_SECRET)
+//console.log(process.env.SESSION_SECRET)
 const express = require('express');
 const port = 3000 || process.env.port
 const bodyParse = require('body-parser')
